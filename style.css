@@ -1,9 +1,8 @@
 body {
   font-family: Arial, sans-serif;
-  background: #fdfdfd;
-  color: #000;
   display: flex;
   justify-content: center;
+  background: #f9fbff;
   margin: 0;
 }
 
@@ -12,47 +11,51 @@ body {
   min-height: 210mm;
   padding: 10mm;
   background: #fff;
-  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+  box-shadow: 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 4px;
   position: relative;
 }
 
-header {
-  text-align: center;
-  color: #d11a2a;
+.logo-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
+.logo {
+  width: 60px;
+  height: 60px;
+}
+
 header h1 {
   color: #d11a2a;
   margin: 0;
+  font-size: 20px;
 }
 header p {
   margin: 2px 0;
+  color: #0074b8;
 }
 
-.invoice-info, .customer-info, .product-entry, .payment-section, .greetings, .totals {
+.invoice-info, .customer-info, .product-entry, .payment-section, .totals {
   margin-top: 10px;
-}
-
-.invoice-info div {
-  display: inline-block;
-  width: 48%;
 }
 
 input, select, button {
   margin: 3px;
-  padding: 5px;
+  padding: 6px;
   font-size: 14px;
 }
 
 button {
-  background: #1a9bd1;
+  background: linear-gradient(90deg, #d11a2a, #0074b8);
   color: white;
   border: none;
-  cursor: pointer;
   border-radius: 4px;
+  cursor: pointer;
 }
 
 button:hover {
-  background: #0e78a6;
+  opacity: 0.9;
 }
 
 table {
@@ -78,9 +81,20 @@ th, td {
 }
 
 footer {
-  position: relative;
   margin-top: 15px;
   text-align: center;
+  position: relative;
+}
+
+#thankYou {
+  font-weight: bold;
+  font-size: 16px;
+  color: #d11a2a;
+}
+#festivalMsg {
+  color: #0074b8;
+  font-weight: bold;
+  font-size: 14px;
 }
 
 .seal-box {
@@ -101,13 +115,13 @@ footer {
 }
 
 @media print {
-  body { background: none; box-shadow: none; }
+  body { background: none; }
   .actions { display: none; }
   .invoice-container {
     box-shadow: none;
     width: 148mm;
     min-height: 210mm;
-    margin: 0;
     padding: 10mm;
+    margin: 0;
   }
 }
