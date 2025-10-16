@@ -1,194 +1,107 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>M.S. Mobile — Billing (A5)</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>M.S. Mobile - Invoice</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
+  <div class="invoice-container">
+    <header>
+      <h1>M.S. MOBILE</h1>
+      <p>All Branded Mobile Sales & Service</p>
+      <p>Money Transfer Available</p>
+      <p><b>📞</b> 82481 08883 | Luna Nagar Bus Stop, Thadagam Road, Edayarpalayam, Coimbatore – 641025</p>
+      <hr>
+    </header>
 
-    <!-- Controls (non-print) -->
-    <div class="card no-print top-controls">
-      <div class="top-row">
-        <div>
-          <strong>M.S. Mobile — Billing (A5)</strong>
-          <div class="muted">Offline · Keyboard barcode scanner friendly</div>
-        </div>
-        <div class="controls-row">
-          <button id="btnPrint" class="btn small">Print</button>
-          <button id="btnPDF" class="btn small">Download PDF (A5)</button>
-          <button id="btnNew" class="btn ghost small">New Bill</button>
-          <button id="btnSavePreset" class="btn ghost small">Save Shop Info</button>
-        </div>
+    <section class="invoice-info">
+      <div>
+        <label>Invoice No:</label>
+        <input type="text" id="invoiceNo" readonly>
       </div>
-
-      <div class="settings-row">
-        <div class="left-settings">
-          <label class="small">Shop Name</label>
-          <input id="shopName" value="M.S. Mobile" />
-
-          <label class="small" style="margin-top:8px">Shop Address</label>
-          <textarea id="shopAddress" rows="2">Luna Nagar Bus Stop, Thadagam Road, Edayarpalayam, Coimbatore - 641025</textarea>
-
-          <div class="inline-settings">
-            <div style="flex:1">
-              <label class="small">Contact (phone/email)</label>
-              <input id="shopContact" value="82481 08883" />
-            </div>
-            <div style="width:120px">
-              <label class="small">Currency</label>
-              <input id="currency" value="₹" />
-            </div>
-            <div style="width:120px">
-              <label class="small">Accent</label>
-              <input id="themeColor" type="color" value="#29a9e1" />
-            </div>
-          </div>
-        </div>
-
-        <div class="right-settings">
-          <label class="small">Invoice # (auto)</label>
-          <input id="invoiceNo" readonly />
-
-          <label class="small" style="margin-top:8px">Date</label>
-          <input id="invoiceDate" readonly />
-
-          <label class="small" style="margin-top:8px">Payment Method</label>
-          <select id="paymentMethod"><option>Cash</option><option>Card</option><option>UPI</option><option>EMI</option></select>
-
-          <label class="small" style="margin-top:8px">Options</label>
-          <div class="options-list">
-            <label><input type="checkbox" id="optPreventDup" checked /> Prevent duplicate IMEI/Serial</label>
-            <label><input type="checkbox" id="optClearAfterPrint" checked /> Auto-clear after print</label>
-            <label><input type="checkbox" id="optSaveInvoices" /> Save invoices (localStorage)</label>
-          </div>
-        </div>
+      <div>
+        <label>Date:</label>
+        <input type="text" id="invoiceDate" readonly>
       </div>
-    </div>
+    </section>
 
-    <!-- Invoice (print area) -->
-    <div id="invoice" class="card" role="document" aria-label="Invoice">
-      <div class="inv-header">
-        <div class="shop-left">
-          <div class="logo-badge" aria-hidden="true">
-            <div class="lg-top">M.S</div>
-            <div class="lg-bottom">Mobile</div>
-          </div>
-          <div>
-            <div class="shop-title" id="shopInfoName">M.S. Mobile</div>
-            <div class="shop-sub" id="shopInfoAddr">
-              All Branded Mobile Sales & Service
-              <br>Money Transfer Available
-              <br>Luna Nagar Bus Stop, Thadagam Road, Edayarpalayam, Coimbatore - 641025
-              <br>Contact: 82481 08883
-            </div>
-          </div>
-        </div>
+    <section class="customer-info">
+      <h3>Customer Details</h3>
+      <input type="text" id="custName" placeholder="Customer Name">
+      <input type="text" id="custContact" placeholder="Contact Number">
+      <input type="text" id="custAddress" placeholder="Address">
+    </section>
 
-        <div class="meta-right">
-          <div>Invoice: <strong id="viewInvoiceNo">INV-0001</strong></div>
-          <div>Date: <span id="viewDate">01-01-2025</span></div>
-          <div>Payment: <span id="viewPayment">Cash</span></div>
-          <div class="muted">Thank you for choosing us</div>
-        </div>
-      </div>
+    <section class="product-entry">
+      <h3>Add Product</h3>
+      <input type="text" id="productName" placeholder="Product Name">
+      <select id="productType">
+        <option>Mobile</option>
+        <option>Accessory</option>
+        <option>EMI</option>
+        <option>Other</option>
+      </select>
+      <input type="text" id="imeiInput" placeholder="Scan IMEI or Serial Number" autofocus>
+      <input type="number" id="quantity" placeholder="Qty" min="1" value="1">
+      <input type="number" id="price" placeholder="Unit Price" min="0">
+      <button id="addBtn">Add Item</button>
+    </section>
 
-      <div class="cust-and-meta">
-        <div class="cust">
-          <div class="card inner-card">
-            <strong>Customer</strong>
-            <div class="cust-fields">
-              <label class="small">Name</label>
-              <input id="customerName" placeholder="Customer name" />
-              <label class="small" style="margin-top:6px">Contact</label>
-              <input id="customerContact" placeholder="Phone" />
-              <label class="small" style="margin-top:6px">Address</label>
-              <textarea id="customerAddress" rows="2" placeholder="Customer address"></textarea>
-            </div>
-          </div>
-        </div>
-
-        <div class="meta">
-          <div class="card inner-card">
-            <strong>Quick Add Item</strong>
-            <div class="quick-add">
-              <label class="small">Product Type</label>
-              <select id="productType"><option>Mobile</option><option>Accessory</option><option>EMI</option><option>Other</option></select>
-              <label class="small" style="margin-top:6px">Product Name / Model</label>
-              <input id="productName" placeholder="e.g., iPhone 15" />
-              <label class="small" style="margin-top:6px">IMEI / Serial (scan or enter)</label>
-              <div class="scanner-row">
-                <input id="scannerInput" placeholder="Scan IMEI/Serial, then press Enter" />
-                <button id="btnAddScanned" class="btn small">Add</button>
-              </div>
-              <div class="inline-settings" style="margin-top:6px">
-                <div style="flex:1">
-                  <label class="small">Qty</label>
-                  <input id="productQty" value="1" type="number" min="1" />
-                </div>
-                <div style="width:120px">
-                  <label class="small">Unit Price</label>
-                  <input id="productPrice" value="0" type="number" min="0" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <table class="items" id="itemsTable" aria-describedby="items-description">
+    <section class="product-table">
+      <table id="itemsTable">
         <thead>
           <tr>
-            <th style="width:6%">#</th>
-            <th style="width:34%">Product</th>
-            <th style="width:12%">Type</th>
-            <th style="width:18%">IMEI / Serial</th>
-            <th style="width:8%">Qty</th>
-            <th style="width:12%">Unit</th>
-            <th style="width:10%">Total</th>
-            <th style="width:6%" class="no-print"></th>
+            <th>#</th>
+            <th>Product</th>
+            <th>Type</th>
+            <th>IMEI/Serial</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Total</th>
           </tr>
         </thead>
-        <tbody id="itemsBody"></tbody>
+        <tbody></tbody>
       </table>
+    </section>
 
-      <div class="right-calc">
-        <div class="totals">
-          <div class="row"><span>Subtotal</span><span id="subtotal">₹0.00</span></div>
-          <div class="row"><span>Discount</span><span id="discount">₹0.00</span></div>
-          <hr />
-          <div class="row total-row"><span>Total</span><span id="grandTotal">₹0.00</span></div>
-        </div>
-      </div>
+    <section class="payment-section">
+      <label>Payment Method:</label>
+      <select id="paymentMethod">
+        <option>Cash</option>
+        <option>Card</option>
+        <option>UPI</option>
+        <option>EMI</option>
+      </select>
+    </section>
 
-      <div class="greetings">
-        <div class="g-options">
-          <label><input type="checkbox" id="gPongal" /> Happy Pongal</label>
-          <label><input type="checkbox" id="gDiwali" /> Happy Diwali</label>
-          <label><input type="checkbox" id="gHoli" /> Happy Holi</label>
-        </div>
-        <div class="thankyou" id="thankyouText">Thank You! Visit Again 😊</div>
-      </div>
+    <section class="greetings">
+      <h3>Greetings</h3>
+      <label><input type="checkbox" class="greetCheck" value="Happy Pongal!"> Pongal</label>
+      <label><input type="checkbox" class="greetCheck" value="Happy Diwali!"> Diwali</label>
+      <label><input type="checkbox" class="greetCheck" value="Happy Holi!"> Holi</label>
+    </section>
 
-      <!-- Seal box (bottom-right) -->
-      <div class="seal-row">
-        <div class="seal-box">
-          <div class="seal-label">Authorized Signatory / Shop Seal</div>
-          <div class="seal-line"></div>
-        </div>
+    <section class="totals">
+      <h2 id="grandTotal">Grand Total: ₹0</h2>
+    </section>
+
+    <footer>
+      <p id="greetingMsg">Thank You! Visit Again 😊</p>
+      <div id="festivalMsg"></div>
+      <div class="seal-box">
+        <p>For M.S. Mobile</p>
+        <div class="seal-space"></div>
       </div>
+    </footer>
+
+    <div class="actions">
+      <button id="printBtn">🖨️ Print</button>
+      <button id="newBtn">🆕 New Bill</button>
     </div>
-
-    <div class="no-print tip">Tip: Use a keyboard-wedge barcode scanner — scan IMEI/Serial and press Enter, or type and click Add.</div>
   </div>
 
-  <!-- CDNs for PDF export -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
-  <!-- App script -->
-  <script src="app.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
