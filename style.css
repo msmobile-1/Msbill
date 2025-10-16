@@ -1,0 +1,113 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #fdfdfd;
+  color: #000;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+}
+
+.invoice-container {
+  width: 148mm;
+  min-height: 210mm;
+  padding: 10mm;
+  background: #fff;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+header {
+  text-align: center;
+  color: #d11a2a;
+}
+header h1 {
+  color: #d11a2a;
+  margin: 0;
+}
+header p {
+  margin: 2px 0;
+}
+
+.invoice-info, .customer-info, .product-entry, .payment-section, .greetings, .totals {
+  margin-top: 10px;
+}
+
+.invoice-info div {
+  display: inline-block;
+  width: 48%;
+}
+
+input, select, button {
+  margin: 3px;
+  padding: 5px;
+  font-size: 14px;
+}
+
+button {
+  background: #1a9bd1;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button:hover {
+  background: #0e78a6;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+table, th, td {
+  border: 1px solid #aaa;
+}
+
+th, td {
+  padding: 5px;
+  text-align: center;
+}
+
+.totals {
+  text-align: right;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+footer {
+  position: relative;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.seal-box {
+  border: 1px dashed #000;
+  width: 120px;
+  height: 60px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+  font-size: 12px;
+  padding-top: 10px;
+}
+
+.actions {
+  text-align: center;
+  margin-top: 10px;
+}
+
+@media print {
+  body { background: none; box-shadow: none; }
+  .actions { display: none; }
+  .invoice-container {
+    box-shadow: none;
+    width: 148mm;
+    min-height: 210mm;
+    margin: 0;
+    padding: 10mm;
+  }
+}
