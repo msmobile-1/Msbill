@@ -9,10 +9,15 @@
 <body>
   <div class="invoice-container">
     <header>
-      <h1>M.S. MOBILE</h1>
-      <p>All Branded Mobile Sales & Service</p>
-      <p>Money Transfer Available</p>
-      <p><b>📞</b> 82481 08883 | Luna Nagar Bus Stop, Thadagam Road, Edayarpalayam, Coimbatore – 641025</p>
+      <div class="logo-title">
+        <img src="logo.png" alt="M.S. Mobile Logo" class="logo">
+        <div>
+          <h1>M.S. MOBILE</h1>
+          <p>All Branded Mobile Sales & Service</p>
+          <p>Money Transfer Available</p>
+          <p><b>📞</b> 82481 08883 | Luna Nagar Bus Stop, Thadagam Road,<br>Edayarpalayam, Coimbatore – 641025</p>
+        </div>
+      </div>
       <hr>
     </header>
 
@@ -42,7 +47,8 @@
         <option>EMI</option>
         <option>Other</option>
       </select>
-      <input type="text" id="imeiInput" placeholder="Scan IMEI or Serial Number" autofocus>
+      <button id="scanBtn">📷 Scan IMEI/Serial</button>
+      <input type="text" id="imeiInput" placeholder="Scan here..." style="display:none">
       <input type="number" id="quantity" placeholder="Qty" min="1" value="1">
       <input type="number" id="price" placeholder="Unit Price" min="0">
       <button id="addBtn">Add Item</button>
@@ -75,20 +81,13 @@
       </select>
     </section>
 
-    <section class="greetings">
-      <h3>Greetings</h3>
-      <label><input type="checkbox" class="greetCheck" value="Happy Pongal!"> Pongal</label>
-      <label><input type="checkbox" class="greetCheck" value="Happy Diwali!"> Diwali</label>
-      <label><input type="checkbox" class="greetCheck" value="Happy Holi!"> Holi</label>
-    </section>
-
     <section class="totals">
       <h2 id="grandTotal">Grand Total: ₹0</h2>
     </section>
 
     <footer>
-      <p id="greetingMsg">Thank You! Visit Again 😊</p>
-      <div id="festivalMsg"></div>
+      <p id="thankYou">Thank You! Visit Again 😊</p>
+      <p id="festivalMsg"></p>
       <div class="seal-box">
         <p>For M.S. Mobile</p>
         <div class="seal-space"></div>
