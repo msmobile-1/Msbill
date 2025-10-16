@@ -2,24 +2,33 @@ document.addEventListener("DOMContentLoaded", () => {
   const invoiceNo = document.getElementById("invoiceNo");
   const invoiceDate = document.getElementById("invoiceDate");
   const addBtn = document.getElementById("addBtn");
+  const scanBtn = document.getElementById("scanBtn");
+  const imeiInput = document.getElementById("imeiInput");
   const tableBody = document.querySelector("#itemsTable tbody");
   const grandTotal = document.getElementById("grandTotal");
   const printBtn = document.getElementById("printBtn");
   const newBtn = document.getElementById("newBtn");
-  const greetChecks = document.querySelectorAll(".greetCheck");
   const festivalMsg = document.getElementById("festivalMsg");
-  const imeiInput = document.getElementById("imeiInput");
 
   let itemCount = 0;
   let totalAmount = 0;
   let serials = new Set();
 
-  // Auto Invoice number and date
-  invoiceNo.value = "INV-" + Date.now().toString().slice(-6);
-  const today = new Date();
-  invoiceDate.value = today.toLocaleDateString("en-GB");
+  // Choose one festival to show (edit below if needed)
+  const activeGreeting = "Happy Diwali!"; 
+  festivalMsg.innerText = activeGreeting;
 
-  // Add item
+  // Auto Invoice and Date
+  invoiceNo.value = "INV-" + Date.now().toString().slice(-6);
+  invoiceDate.value = new Date().toLocaleDateString("en-GB");
+
+  // Show IMEI scan field when button clicked
+  scanBtn.addEventListener("click", () => {
+    imeiInput.style.display = "inline-block";
+    imeiInput.focus();
+  });
+
+  // Add product
   addBtn.addEventListener("click", () => {
     const name = document.getElementById("productName").value.trim();
     const type = document.getElementById("productType").value;
@@ -34,7 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (serials.has(imei)) {
       alert("Duplicate IMEI/Serial not allowed.");
-      imeiInput.focus();
       return;
     }
 
@@ -55,30 +63,16 @@ document.addEventListener("DOMContentLoaded", () => {
     tableBody.appendChild(row);
 
     grandTotal.innerText = `Grand Total: ₹${totalAmount.toFixed(2)}`;
+
+    // Clear inputs
     document.getElementById("productName").value = "";
-    imeiInput.value = "";
     document.getElementById("quantity").value = 1;
     document.getElementById("price").value = "";
-    imeiInput.focus();
+    imeiInput.value = "";
+    imeiInput.style.display = "none";
   });
 
-  // Greetings checkboxes
-  greetChecks.forEach(box => {
-    box.addEventListener("change", () => {
-      const selected = Array.from(greetChecks)
-        .filter(ch => ch.checked)
-        .map(ch => ch.value);
-      festivalMsg.innerHTML = selected.join(" • ");
-    });
-  });
-
-  // Print
-  printBtn.addEventListener("click", () => {
-    window.print();
-  });
-
-  // New Bill
-  newBtn.addEventListener("click", () => {
-    location.reload();
-  });
+  // Print and new bill
+  printBtn.addEventListener("click", () => window.print());
+  newBtn.addEventListener("click", () => location.reload());
 });
